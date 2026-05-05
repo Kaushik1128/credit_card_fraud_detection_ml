@@ -12,6 +12,7 @@ xgboost>=2.1         # gradient-boosted trees — typically state-of-the-art on 
 lightgbm>=4.5        # alternative gradient booster, often faster than XGBoost
 imbalanced-learn>=0.13  # SMOTE and other resampling techniques for class imbalance
 joblib>=1.4          # serialize/load trained models to disk
+pyarrow>=18.0        # Parquet I/O — faster and smaller than CSV, preserves dtypes
 
 # ---- Notebooks ----
 jupyterlab>=4.2      # IDE-style interface for interactive analysis
