@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data & models — too large / regenerable
+data/raw/*.csv
+data/processed/*.csv
+data/processed/*.parquet
+models/*.joblib
+models/*.pkl
+
+# Frontend (added in Phase 4)
+node_modules/
+.next/
+.vercel/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local Claude Code settings (personal, not shared)
+.claude/settings.local.json
+
+# Secrets
+.env
+.env.local
+*.key

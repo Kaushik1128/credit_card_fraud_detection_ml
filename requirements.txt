@@ -1,0 +1,18 @@
+# ---- Core data stack ----
+numpy>=2.0           # n-dimensional arrays; the substrate everything else builds on
+pandas>=2.2          # DataFrames for tabular data (loading the CSV, cleaning, splits)
+
+# ---- Visualization ----
+matplotlib>=3.9      # general-purpose plotting (used by everything else under the hood)
+seaborn>=0.13        # higher-level statistical plots — nicer defaults than raw matplotlib
+
+# ---- Modeling ----
+scikit-learn>=1.5    # baseline models, metrics, train/test split, cross-validation
+xgboost>=2.1         # gradient-boosted trees — typically state-of-the-art on tabular data
+lightgbm>=4.5        # alternative gradient booster, often faster than XGBoost
+imbalanced-learn>=0.13  # SMOTE and other resampling techniques for class imbalance
+joblib>=1.4          # serialize/load trained models to disk
+
+# ---- Notebooks ----
+jupyterlab>=4.2      # IDE-style interface for interactive analysis
+ipykernel>=6.29      # lets the venv show up as a Jupyter kernel
