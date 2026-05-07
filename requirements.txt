@@ -17,3 +17,7 @@ pyarrow>=18.0        # Parquet I/O — faster and smaller than CSV, preserves dt
 # ---- Notebooks ----
 jupyterlab>=4.2      # IDE-style interface for interactive analysis
 ipykernel>=6.29      # lets the venv show up as a Jupyter kernel
+
+# ---- API (Phase 3) ----
+fastapi>=0.115       # web framework — Pydantic validation, async, auto OpenAPI
+uvicorn[standard]>=0.32  # ASGI server that runs FastAPI in production
