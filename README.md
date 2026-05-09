@@ -6,16 +6,17 @@ End-to-end machine learning project: stratified data pipeline → XGBoost classi
 
 ## 🚀 Live demo
 
-The FastAPI backend is deployed on Render:
+| Layer | URL |
+|---|---|
+| **Web app** (Vercel) | **https://credit-card-fraud-detection-ml.vercel.app** |
+| API (Render) | https://fraud-detection-api-r7y4.onrender.com |
+| Swagger UI | https://fraud-detection-api-r7y4.onrender.com/docs |
 
-- **API**: https://fraud-detection-api-r7y4.onrender.com
-- **Interactive docs (Swagger UI)**: https://fraud-detection-api-r7y4.onrender.com/docs
-- **Health**: https://fraud-detection-api-r7y4.onrender.com/health
-- **Model info**: https://fraud-detection-api-r7y4.onrender.com/model-info
+Click any of the three sample buttons in the web app to see the model classify a real test-set transaction. The **"borderline"** sample is the most interesting — it's an actual *legitimate* purchase that the model still flags as fraud, demonstrating the cost-tuning trade-off in action.
 
-> First request after >15 min of idle takes ~30–60s (Render free tier cold start). Subsequent calls return in <1s.
+> **Heads up on cold starts.** The Render free tier spins down after 15 min of idle. The first prediction after a long quiet period takes ~30–60s while the container restarts. Subsequent calls return in under a second.
 
-Try it from a terminal:
+You can also call the API directly:
 
 ```bash
 curl -X POST https://fraud-detection-api-r7y4.onrender.com/predict \
@@ -23,9 +24,7 @@ curl -X POST https://fraud-detection-api-r7y4.onrender.com/predict \
   -d '{"Time":57007,"Amount":0.01,"V1":-1.271244,"V2":2.462675,"V3":-2.851395,"V4":2.32448,"V5":-1.372245,"V6":-0.948196,"V7":-3.065234,"V8":1.166927,"V9":-2.268771,"V10":-4.881143,"V11":2.255147,"V12":-4.686387,"V13":0.652375,"V14":-6.174288,"V15":0.59438,"V16":-4.849692,"V17":-6.536521,"V18":-3.119094,"V19":1.715494,"V20":0.560478,"V21":0.652941,"V22":0.081931,"V23":-0.221348,"V24":-0.523582,"V25":0.224228,"V26":0.756335,"V27":0.6328,"V28":0.250187}'
 ```
 
-→ Returns `P(fraud) = 0.9998, is_fraud=true` (a $0.01 card-testing fraud pattern).
-
-Frontend deployment in Phase 5.5 (Vercel).
+→ `{"fraud_probability":0.9998,"is_fraud":true,"threshold":0.035,"model_name":"xgboost_v1"}` (a $0.01 card-testing fraud pattern).
 
 ---
 
@@ -210,7 +209,8 @@ Each commit captures one focused phase:
 | 5.1 | `89fde78` | README — project front door |
 | 5.2 | `6948969` | pytest suite (15 tests, found one real bug in `/predict/batch`) |
 | 5.3 | `201b541` | Dockerfile + `.dockerignore` + `requirements-prod.txt` |
-| 5.4 | `0167665` | Render Blueprint, model bundle un-gitignored — **deployed live** |
+| 5.4 | `0167665` | Render Blueprint, model bundle un-gitignored — **API deployed live** |
+| 5.5 | *this commit* | Frontend deployed to Vercel — **end-to-end public demo live** |
 
 Run `git log --oneline` to see them all, or `git show <hash>` for any commit's full diff.
 
