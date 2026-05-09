@@ -243,4 +243,4 @@ Key insight: **trees are far less imbalance-sensitive than logistic regression.*
 
 ## License
 
-MIT — see `LICENSE` (to be added in 5.x if desired).
+MIT — see [LICENSE](LICENSE).
