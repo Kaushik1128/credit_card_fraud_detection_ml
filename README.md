@@ -4,7 +4,7 @@ End-to-end machine learning project: stratified data pipeline → XGBoost classi
 
 **Headline result: PR-AUC 0.877 on a held-out test set** (validation 0.833, baseline logistic regression 0.683).
 
-## 🚀 Live demo
+##  Live demo
 
 | Layer | URL |
 |---|---|
@@ -76,12 +76,12 @@ The threshold choice is a separate decision after training. For our cost model (
 
 ```
 ┌──────────────────────┐    HTTP/JSON    ┌─────────────────────┐
-│   web/  (Next.js)    │  ─────────────▶ │   app/  (FastAPI)   │
-│   React + Tailwind   │  ◀───────────── │   /predict /health  │
+│   web/  (Next.js)    │   ───────────>  │   app/  (FastAPI)   │
+│   React + Tailwind   │   <───────────  │   /predict /health  │
 │   localhost:3000     │                 │   localhost:8000    │
 └──────────────────────┘                 └──────────┬──────────┘
-                                                     │ joblib.load
-                                                     ▼
+                                                    │ joblib.load
+                                                    ▼
                                          ┌─────────────────────┐
                                          │   models/           │
                                          │   fraud_model.joblib│
@@ -90,8 +90,8 @@ The threshold choice is a separate decision after training. For our cost model (
                                          │    threshold +      │
                                          │    metadata)        │
                                          └──────────┬──────────┘
-                                                     │ trained by
-                                                     ▼
+                                                    │ trained by
+                                                    ▼
                                          ┌─────────────────────┐
                                          │   src/  (Python)    │
                                          │   data, training,   │
@@ -222,7 +222,7 @@ For the curious: four imbalance strategies trained on the same XGBoost hyperpara
 
 | Strategy | Val PR-AUC | Notes |
 |---|---|---|
-| `scale_pos_weight` ⭐ | **0.8334** | Winner |
+| `scale_pos_weight`  | **0.8334** | Winner |
 | none | 0.8316 | Trees handle imbalance natively — surprisingly close |
 | SMOTE | 0.8155 | Synthetic neighbors in PCA space slightly hurt |
 | undersample | 0.4886 | Collapsed — only ~590 training rows |
