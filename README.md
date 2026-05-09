@@ -4,7 +4,28 @@ End-to-end machine learning project: stratified data pipeline → XGBoost classi
 
 **Headline result: PR-AUC 0.877 on a held-out test set** (validation 0.833, baseline logistic regression 0.683).
 
-> **Status:** running end-to-end locally. Deployment in Phase 5.4 / 5.5.
+## 🚀 Live demo
+
+The FastAPI backend is deployed on Render:
+
+- **API**: https://fraud-detection-api-r7y4.onrender.com
+- **Interactive docs (Swagger UI)**: https://fraud-detection-api-r7y4.onrender.com/docs
+- **Health**: https://fraud-detection-api-r7y4.onrender.com/health
+- **Model info**: https://fraud-detection-api-r7y4.onrender.com/model-info
+
+> First request after >15 min of idle takes ~30–60s (Render free tier cold start). Subsequent calls return in <1s.
+
+Try it from a terminal:
+
+```bash
+curl -X POST https://fraud-detection-api-r7y4.onrender.com/predict \
+  -H "Content-Type: application/json" \
+  -d '{"Time":57007,"Amount":0.01,"V1":-1.271244,"V2":2.462675,"V3":-2.851395,"V4":2.32448,"V5":-1.372245,"V6":-0.948196,"V7":-3.065234,"V8":1.166927,"V9":-2.268771,"V10":-4.881143,"V11":2.255147,"V12":-4.686387,"V13":0.652375,"V14":-6.174288,"V15":0.59438,"V16":-4.849692,"V17":-6.536521,"V18":-3.119094,"V19":1.715494,"V20":0.560478,"V21":0.652941,"V22":0.081931,"V23":-0.221348,"V24":-0.523582,"V25":0.224228,"V26":0.756335,"V27":0.6328,"V28":0.250187}'
+```
+
+→ Returns `P(fraud) = 0.9998, is_fraud=true` (a $0.01 card-testing fraud pattern).
+
+Frontend deployment in Phase 5.5 (Vercel).
 
 ---
 
@@ -186,7 +207,10 @@ Each commit captures one focused phase:
 | 2.7 | `468216b` | Finalize bundle, score on test (PR-AUC **0.877**) |
 | 3 | `45adf9f` | FastAPI service with Pydantic validation |
 | 4 | `d55e1ba` | Next.js + Tailwind frontend |
-| 5.1 | *this commit* | README |
+| 5.1 | `89fde78` | README — project front door |
+| 5.2 | `6948969` | pytest suite (15 tests, found one real bug in `/predict/batch`) |
+| 5.3 | `201b541` | Dockerfile + `.dockerignore` + `requirements-prod.txt` |
+| 5.4 | `0167665` | Render Blueprint, model bundle un-gitignored — **deployed live** |
 
 Run `git log --oneline` to see them all, or `git show <hash>` for any commit's full diff.
 
