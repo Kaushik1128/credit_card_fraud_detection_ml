@@ -1,0 +1,20 @@
+# Render Blueprint — Infrastructure-as-Code config for the FastAPI service.
+#
+# Spec: https://render.com/docs/blueprint-spec
+#
+# When this file is at the repo root, Render reads it and provisions the
+# service automatically. The first deploy may still need a one-time approval
+# in the dashboard ("New + > Blueprint > select repo > Apply").
+#
+# After approval, every push to main triggers an auto-deploy.
+
+services:
+  - type: web
+    name: fraud-detection-api
+    runtime: docker          # build from the Dockerfile at the repo root
+    plan: free               # free tier — note: cold starts after 15 min idle
+    region: oregon           # change if you need a different region
+    branch: main             # deploy on push to main
+    autoDeploy: true
+    healthCheckPath: /health # Render uses this to know when the service is ready
+    envVars: []              # no secrets needed for this service

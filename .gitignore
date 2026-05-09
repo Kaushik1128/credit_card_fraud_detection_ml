@@ -20,6 +20,10 @@ data/processed/*.csv
 data/processed/*.parquet
 models/*.joblib
 models/*.pkl
+# ...except the final production bundle, which the Docker image needs.
+# 611 KB — committed for deployment convenience (regenerable via
+# `python -m src.finalize_model` if the data and intermediate artifacts exist).
+!models/fraud_model.joblib
 
 # Frontend (added in Phase 4)
 node_modules/
