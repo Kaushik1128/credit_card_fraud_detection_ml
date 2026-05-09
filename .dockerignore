@@ -1,0 +1,48 @@
+# Files to keep out of the Docker build context.
+# Smaller context = faster builds and smaller images.
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Notebooks and training artifacts (not needed at inference time)
+notebooks/
+data/
+*.ipynb
+
+# Tests stay out of the production image
+tests/
+
+# Frontend has its own deployment
+web/
+
+# Other model files we don't ship — only fraud_model.joblib is COPYed explicitly,
+# but we still exclude the rest from the build context to keep it lean.
+models/preprocessor.joblib
+models/logreg_baseline.joblib
+models/xgboost_baseline.joblib
+
+# Dev / IDE / OS / VCS
+.git/
+.gitignore
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Secrets must never enter the image
+.env
+.env.*
+*.key
+
+# Build / cache outputs we don't want pulled in
+.next/
+node_modules/
+
+# Reference duplicates the user keeps locally
+figures(copy)/

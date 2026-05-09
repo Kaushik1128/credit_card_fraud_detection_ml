@@ -1,0 +1,14 @@
+# Production-only dependencies — what the FastAPI service needs at RUNTIME.
+# Compare with requirements.txt (which adds training, plotting, notebooks, tests).
+#
+# The deployed image installs only this subset: smaller image, smaller attack
+# surface, fewer transitive deps to audit.
+
+numpy>=2.0
+pandas>=2.2
+scikit-learn>=1.5    # the fitted preprocessor and the Pipeline wrapper
+xgboost>=2.1         # the fitted classifier inside the bundle
+joblib>=1.4          # to load models/fraud_model.joblib
+
+fastapi>=0.115
+uvicorn[standard]>=0.32
