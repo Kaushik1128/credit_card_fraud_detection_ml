@@ -56,11 +56,18 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Allow the Phase 4 Next.js frontend (different origin) to call us.
-# Lock down `allow_origins` to your real frontend domain in production.
+# CORS — only allow our own origins to call this API:
+#   - localhost:3000 for local Next.js dev
+#   - https://credit-card-fraud-detection-ml.vercel.app (production)
+#   - any Vercel preview deployment for this project
+#     e.g. https://credit-card-fraud-detection-ml-git-branch-user.vercel.app
+# Anything else (other domains, the browser will see a CORS-blocked response).
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:3000",
+    ],
+    allow_origin_regex=r"^https://credit-card-fraud-detection-ml(-.*)?\.vercel\.app$",
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
