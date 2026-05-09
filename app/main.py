@@ -120,6 +120,8 @@ def predict_one(transaction: Transaction):
 @app.post("/predict/batch", response_model=BatchPredictionResponse)
 def predict_many(request: BatchTransactionRequest):
     bundle = _bundle_or_503()
+    if not request.transactions:
+        return BatchPredictionResponse(predictions=[])
     X = pd.DataFrame([t.model_dump() for t in request.transactions])
     scores = _score_dataframe(bundle, X)
     threshold = bundle["threshold"]
